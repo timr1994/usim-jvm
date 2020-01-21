@@ -71,6 +71,9 @@
 #include "utilities/events.hpp"
 #include "utilities/hashtable.inline.hpp"
 #include "utilities/macros.hpp"
+
+#include <uiim.h>
+
 #if INCLUDE_CDS
 #include "classfile/sharedPathsMiscInfo.hpp"
 #endif
@@ -1399,11 +1402,9 @@ InstanceKlass* ClassLoader::load_class(Symbol* name, bool search_append_only, TR
 
   ResourceMark rm(THREAD);
   HandleMark hm(THREAD);
-
   const char* const class_name = name->as_C_string();
-
   EventMark m("loading class %s", class_name);
-  printf("%s will be loaded\n",class_name);
+
   const char* const file_name = file_name_for_class_name(class_name,
                                                          name->utf8_length());
   assert(file_name != NULL, "invariant");
@@ -1473,6 +1474,7 @@ InstanceKlass* ClassLoader::load_class(Symbol* name, bool search_append_only, TR
   }
 
   if (NULL == stream) {
+    //printf("%s returns null\n", class_name);
     return NULL;
   }
 
@@ -1480,7 +1482,7 @@ InstanceKlass* ClassLoader::load_class(Symbol* name, bool search_append_only, TR
 
   ClassLoaderData* loader_data = ClassLoaderData::the_null_class_loader_data();
   Handle protection_domain;
-
+  addEntry(23, "JAVA_LOADCLASS", class_name, stream->buffer(), stream->length());
   InstanceKlass* result = KlassFactory::create_from_stream(stream,
                                                            name,
                                                            loader_data,

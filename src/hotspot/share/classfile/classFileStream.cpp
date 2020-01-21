@@ -29,6 +29,7 @@
 #include "classfile/vmSymbols.hpp"
 #include "memory/resourceArea.hpp"
 
+
 const bool ClassFileStream::verify = true;
 const bool ClassFileStream::no_verification = false;
 
@@ -144,3 +145,4 @@ uint64_t ClassFileStream::compute_fingerprint() const {
 
   return fingerprint;
 }
+

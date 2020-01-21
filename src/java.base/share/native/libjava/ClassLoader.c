@@ -238,6 +238,7 @@ Java_java_lang_ClassLoader_findBootstrapClass(JNIEnv *env, jobject loader,
     }
 
     cls = JVM_FindClassFromBootLoader(env, clname);
+    
 
  done:
     if (clname != buf) {

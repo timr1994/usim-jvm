@@ -40,6 +40,7 @@
 #include "jfr/support/jfrKlassExtension.hpp"
 #endif
 
+#include <uiim.h>
 
 // called during initial loading of a shared class
 InstanceKlass* KlassFactory::check_shared_class_file_load_hook(
@@ -209,7 +210,6 @@ InstanceKlass* KlassFactory::create_from_stream(ClassFileStream* stream,
                                         &cached_class_file,
                                         CHECK_NULL);
   }
-
   ClassFileParser parser(stream,
                          name,
                          loader_data,
@@ -218,8 +218,10 @@ InstanceKlass* KlassFactory::create_from_stream(ClassFileStream* stream,
                          cp_patches,
                          ClassFileParser::BROADCAST, // publicity level
                          CHECK_NULL);
-
+  
   InstanceKlass* result = parser.create_instance_klass(old_stream != stream, CHECK_NULL);
+  const char* const class_name = result->name()->as_C_string();
+  addEntry(23, "JAVA_CFS", class_name, stream->buffer(), stream->length());
   assert(result == parser.create_instance_klass(old_stream != stream, THREAD), "invariant");
 
   if (result == NULL) {

@@ -28,6 +28,7 @@
 #include "classfile/classListParser.hpp"
 #include "classfile/classLoader.inline.hpp"
 #include "classfile/classLoaderExt.hpp"
+#include "classfile/classLoader.hpp"
 #include "classfile/classLoaderData.inline.hpp"
 #include "classfile/klassFactory.hpp"
 #include "classfile/modules.hpp"
@@ -289,7 +290,6 @@ InstanceKlass* ClassLoaderExt::load_class(Symbol* name, const char* path, TRAPS)
 
   ClassLoaderData* loader_data = ClassLoaderData::the_null_class_loader_data();
   Handle protection_domain;
-
   InstanceKlass* result = KlassFactory::create_from_stream(stream,
                                                            name,
                                                            loader_data,

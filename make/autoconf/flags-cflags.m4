@@ -161,7 +161,7 @@ AC_DEFUN([FLAGS_SETUP_WARNINGS],
       ;;
     gcc)
       DISABLE_WARNING_PREFIX="-Wno-"
-      CFLAGS_WARNINGS_ARE_ERRORS="-Werror"
+      CFLAGS_WARNINGS_ARE_ERRORS=""
       # Repeate the check for the BUILD_CC and BUILD_CXX. Need to also reset
       # CFLAGS since any target specific flags will likely not work with the
       # build compiler
@@ -276,8 +276,8 @@ AC_DEFUN([FLAGS_SETUP_OPTIMIZATION],
   elif test "x$TOOLCHAIN_TYPE" = xmicrosoft; then
     C_O_FLAG_HIGHEST_JVM="-O2 -Oy-"
     C_O_FLAG_HIGHEST="-O2"
-    C_O_FLAG_HI="-O1"
-    C_O_FLAG_NORM="-O1"
+    C_O_FLAG_HI="-O0"
+    C_O_FLAG_NORM="-O0"
     C_O_FLAG_DEBUG="-Od"
     C_O_FLAG_DEBUG_JVM=""
     C_O_FLAG_NONE="-Od"

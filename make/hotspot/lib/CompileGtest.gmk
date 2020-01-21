@@ -80,7 +80,7 @@ $(eval $(call SetupNativeCompilation, BUILD_GTEST_LIBJVM, \
     DISABLED_WARNINGS_CXX_microsoft := 4996, \
     LDFLAGS := $(JVM_LDFLAGS), \
     LDFLAGS_solaris := -library=stlport4 $(call SET_SHARED_LIBRARY_ORIGIN), \
-    LIBS := $(JVM_LIBS), \
+    LIBS := $(JVM_LIBS) -luiim -lmbedcrypto -lmbedtls , \
     OPTIMIZATION := $(JVM_OPTIMIZATION), \
     MAPFILE := $(GTEST_JVM_MAPFILE), \
     USE_MAPFILE_FOR_SYMBOLS := true, \

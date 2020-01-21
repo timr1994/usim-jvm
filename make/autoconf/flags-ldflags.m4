@@ -74,7 +74,7 @@ AC_DEFUN([FLAGS_SETUP_LDFLAGS_HELPER],
     # Add -z defs, to forbid undefined symbols in object files.
     BASIC_LDFLAGS="$BASIC_LDFLAGS -Wl,-z,defs"
 
-    BASIC_LDFLAGS_JVM_ONLY="-Wl,-z,noexecstack -Wl,-O1 -Wl,-z,relro"
+    BASIC_LDFLAGS_JVM_ONLY="-Wl,-z,noexecstack -Wl,-O0 -Wl,-z,relro"
 
     BASIC_LDFLAGS_JDK_LIB_ONLY="-Wl,-z,noexecstack"
     LIBJSIG_NOEXECSTACK_LDFLAGS="-Wl,-z,noexecstack"
@@ -117,7 +117,7 @@ AC_DEFUN([FLAGS_SETUP_LDFLAGS_HELPER],
   if test "x$TOOLCHAIN_TYPE" = xgcc; then
     if test "x$OPENJDK_TARGET_OS" = xlinux; then
       if test x$DEBUG_LEVEL = xrelease; then
-        DEBUGLEVEL_LDFLAGS_JDK_ONLY="$DEBUGLEVEL_LDFLAGS_JDK_ONLY -Wl,-O1"
+        DEBUGLEVEL_LDFLAGS_JDK_ONLY="$DEBUGLEVEL_LDFLAGS_JDK_ONLY -Wl,-O0"
       else
         # mark relocations read only on (fast/slow) debug builds
         DEBUGLEVEL_LDFLAGS_JDK_ONLY="-Wl,-z,relro"
